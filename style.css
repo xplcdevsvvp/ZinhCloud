@@ -1,48 +1,7 @@
-/* Fixed Navbar */
-.fixed-navbar {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: max-content;
-  background: rgba(24,24,28,0.95);
-  border-radius: 32px;
-  box-shadow: 0 8px 32px rgba(56,189,248,0.18);
-  padding: 18px 40px;
-  z-index: 100;
-}
-.navbar-content {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-.navbar-logo {
-  font-size: 2rem;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: 1px;
-  margin-right: 24px;
-}
-.navbar-links {
-  display: flex;
-  gap: 18px;
-}
-.navbar-links a {
-  color: #fff;
-  font-weight: 700;
-  text-decoration: none;
-  border-radius: 18px;
-  padding: 8px 22px;
-  transition: background 0.3s, color 0.3s;
-}
-.navbar-links a:hover {
-  color: #4f8cff;
-  background: rgba(56,189,248,0.08);
-}
 /* Dynamic Island Navbar */
 .dynamic-navbar {
   position: fixed;
-  top: 24px;
+  top: 8px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(24,24,28,0.95);
@@ -55,6 +14,8 @@
   transition: all 0.4s cubic-bezier(.4,2,.3,1);
   z-index: 100;
   width: max-content;
+  left: 50vw;
+  right: auto;
 }
 .dynamic-navbar.shrink {
   padding: 8px 24px;
