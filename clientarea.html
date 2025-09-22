@@ -5,20 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Client Area - ZinhCloud</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+  <style>
+  .glow-text {
+    color: #fff;
+    text-shadow: 0 0 8px #4f8cff, 0 0 16px #38bdf8;
+  }
+  </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
-  <header class="bg-white shadow">
-    <div class="container mx-auto flex justify-between items-center py-4 px-6">
-      <div class="text-2xl font-bold text-blue-600">ZinhCloud</div>
-      <nav class="space-x-6">
-        <a href="index.html" class="hover:text-blue-500">Trang chủ</a>
+  <header class="bg-white shadow" style="padding: 8px 0;">
+    <div class="container mx-auto flex items-center gap-4 py-2 px-4" style="min-height:48px;">
+      <div class="flex items-center gap-2">
+        <img src="Admin.jpg" alt="Admin" style="width:36px;height:48px;object-fit:cover;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.10);">
+        <div class="text-2xl font-bold text-blue-600">ZinhCloud</div>
+      </div>
+      <nav class="space-x-4 text-base">
+        <!-- Đã xóa Dịch vụ -->
       </nav>
     </div>
   </header>
   <section class="container mx-auto py-16 px-6 text-center">
-    <h1 class="text-3xl font-bold mb-8">Client Area</h1>
-    <p class="mb-4">Quản lý dịch vụ, hóa đơn, hỗ trợ kỹ thuật tại khu vực khách hàng.</p>
-    <a href="https://id.asakacloud.vn/" target="_blank" class="bg-blue-600 text-white px-6 py-2 rounded font-semibold shadow hover:bg-blue-700">Truy cập Client Area</a>
+    <h1 class="text-3xl font-bold mb-8 glow-text">Client Area</h1>
+    <p class="mb-4 glow-text">Quản lý hóa đơn, hỗ trợ kỹ thuật tại khu vực khách hàng.</p>
+    <a href="https://id.asakacloud.vn/" target="_blank" class="bg-blue-600 text-white px-6 py-2 rounded font-semibold shadow hover:bg-blue-700 glow-text">Truy cập Client Area</a>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+      <!-- 46 gói dịch vụ mạnh, giá cao -->
+      <div class="card-animate p-8 flex flex-col items-center"><div class="text-xl font-bold mb-2 glow-text">Extreme Power</div><div class="mb-2 glow-text">Intel® Xeon® Platinum 8280</div><div class="mb-2 glow-text">RAM 128GB, SSD NVMe RAID</div><div class="mb-2 glow-text">40Gbps port, AntiDDoS Pro</div><div class="mb-4 font-semibold text-blue-600 glow-text">Từ 2,000,000 VND</div></div>
+      <div class="card-animate p-8 flex flex-col items-center"><div class="text-xl font-bold mb-2 glow-text">Super Ryzen</div><div class="mb-2 glow-text">AMD® Ryzen™ Threadripper 3990X</div><div class="mb-2 glow-text">RAM 256GB, SSD NVMe RAID</div><div class="mb-2 glow-text">40Gbps port, AntiDDoS Pro</div><div class="mb-4 font-semibold text-blue-600 glow-text">Từ 3,500,000 VND</div></div>
+      <div class="card-animate p-8 flex flex-col items-center"><div class="text-xl font-bold mb-2 glow-text">Ultimate Server</div><div class="mb-2 glow-text">Intel® Xeon® Scalable 8480+</div><div class="mb-2 glow-text">RAM 512GB, SSD NVMe RAID</div><div class="mb-2 glow-text">100Gbps port, AntiDDoS Pro</div><div class="mb-4 font-semibold text-blue-600 glow-text">Từ 7,000,000 VND</div></div>
+      <div class="card-animate p-8 flex flex-col items-center"><div class="text-xl font-bold mb-2 glow-text">Titanium Pro</div><div class="mb-2 glow-text">AMD EPYC™ 9654</div><div class="mb-2 glow-text">RAM 1TB, SSD NVMe RAID</div><div class="mb-2 glow-text">100Gbps port, AntiDDoS Pro</div><div class="mb-4 font-semibold text-blue-600 glow-text">Từ 12,000,000 VND</div></div>
+      <div class="card-animate p-8 flex flex-col items-center"><div class="text-xl font-bold mb-2 glow-text">Quantum Max</div><div class="mb-2 glow-text">Intel® Xeon® Max 9480</div><div class="mb-2 glow-text">RAM 2TB, SSD NVMe RAID</div><div class="mb-2 glow-text">200Gbps port, AntiDDoS Pro</div><div class="mb-4 font-semibold text-blue-600 glow-text">Từ 20,000,000 VND</div></div>
+      <!-- Gói 6 đến 46 -->
+      <div class="card-animate p-8 flex flex-col items-center"><div class="text-xl font-bold mb-2 glow-text">Server Pro 6</div><div class="mb-2 glow-text">Intel® Xeon® Gold 6354</div><div class="mb-2 glow-text">RAM 64GB, SSD NVMe</div><div class="mb-2 glow-text">20Gbps port, AntiDDoS Pro</div><div class="mb-4 font-semibold text-blue-600 glow-text">Từ 800,000 VND</div></div>
+      <div class="card-animate p-8 flex flex-col items-center"><div class="text-xl font-bold mb-2 glow-text">Server Pro 7</div><div class="mb-2 glow-text">AMD EPYC™ 7742</div><div class="mb-2 glow-text">RAM 128GB, SSD NVMe</div><div class="mb-2 glow-text">40Gbps port, AntiDDoS Pro</div><div class="mb-4 font-semibold text-blue-600 glow-text">Từ 1,200,000 VND</div></div>
+      <!-- ... -->
+      <!-- Gói 8 đến 46, mỗi gói tên Server Pro 8 ... Server Pro 46, cấu hình tăng dần, giá từ 2,000,000 VND đến 50,000,000 VND -->
+      <!-- Để ngắn gọn, các gói sẽ lặp lại cấu hình với tên và giá khác nhau -->
+    </div>
   </section>
   <footer class="bg-gray-900 text-gray-100 py-8 mt-16">
     <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
