@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+    <style>
+      .sticky-navbar { position: sticky; top: 0; z-index: 50; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+      @media (max-width: 768px) {
+        .container { padding-left: 1rem !important; padding-right: 1rem !important; }
+        .nav-animate { font-size: 1rem; }
+        .text-4xl { font-size: 2rem; }
+        .text-3xl { font-size: 1.5rem; }
+      }
+      .modal-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 100; }
+      .modal { background: #fff; border-radius: 1rem; box-shadow: 0 8px 32px rgba(56,189,248,0.15); padding: 2rem; min-width: 320px; max-width: 90vw; }
+      .modal input { width: 100%; margin-bottom: 1rem; padding: 0.5rem; border-radius: 0.5rem; border: 1px solid #e5e7eb; }
+      .modal button { width: 100%; }
+    </style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZinhCloud - Dịch vụ cho thuê máy chủ Game Việt Nam</title>
@@ -53,12 +66,49 @@
 <body class="bg-gray-50 text-gray-900">
   <!-- Header -->
   <header class="bg-white shadow">
-    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+  <div class="container mx-auto flex justify-between items-center py-4 px-6 sticky-navbar">
       <div class="flex items-center gap-2">
         <img src="https://img.zyndata.vn/asakacloud-text.svg" alt="ZinhCloud Logo" class="w-10 h-10">
         <span class="text-2xl font-bold text-blue-600 tracking-tight">ZinhCloud</span>
       </div>
       <nav class="space-x-6 flex items-center">
+  <button id="loginBtn" class="nav-animate">Đăng nhập</button>
+  <button id="registerBtn" class="nav-animate">Đăng ký</button>
+  <!-- Modal Popup -->
+  <div id="modalBg" class="modal-bg" style="display:none;">
+    <div class="modal animate__animated animate__fadeInDown">
+      <h2 id="modalTitle" class="text-xl font-bold mb-4 text-blue-600">Đăng nhập</h2>
+      <input type="text" id="modalUser" placeholder="Tên đăng nhập" autocomplete="username">
+      <input type="password" id="modalPass" placeholder="Mật khẩu" autocomplete="current-password">
+      <button id="modalSubmit" class="bg-blue-600 text-white px-4 py-2 rounded-xl btn-animate font-semibold shadow-lg mb-2">Đăng nhập</button>
+      <button id="modalClose" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-xl font-semibold shadow hover:bg-gray-300 w-full">Đóng</button>
+    </div>
+  </div>
+  <script>
+    // Modal popup logic
+    const modalBg = document.getElementById('modalBg');
+    const loginBtn = document.getElementById('loginBtn');
+    const registerBtn = document.getElementById('registerBtn');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalSubmit = document.getElementById('modalSubmit');
+    const modalClose = document.getElementById('modalClose');
+    if (loginBtn) loginBtn.onclick = function() {
+      modalTitle.textContent = 'Đăng nhập';
+      modalSubmit.textContent = 'Đăng nhập';
+      modalBg.style.display = 'flex';
+    };
+    if (registerBtn) registerBtn.onclick = function() {
+      modalTitle.textContent = 'Đăng ký';
+      modalSubmit.textContent = 'Đăng ký';
+      modalBg.style.display = 'flex';
+    };
+    if (modalClose) modalClose.onclick = function() {
+      modalBg.style.display = 'none';
+    };
+    window.onclick = function(e) {
+      if (e.target === modalBg) modalBg.style.display = 'none';
+    };
+  </script>
         <a href="#dichvu" class="nav-animate">Dịch vụ</a>
         <a href="#phanmem" class="nav-animate">Phần mềm hỗ trợ</a>
         <a href="#khachhang" class="nav-animate">Khách hàng</a>
