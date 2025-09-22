@@ -9,31 +9,20 @@
 </head>
 <body class="bg-black text-white">
 	<!-- Navbar -->
-	<header id="dynamic-navbar" class="dynamic-navbar">
-		<div class="flex items-center gap-3">
-			<img src="https://img.zyndata.vn/asakacloud-text.svg" alt="ZinhCloud Logo" class="w-12 h-12 rounded-xl">
-			<span class="text-2xl font-extrabold tracking-tight">ZinhCloud</span>
-		</div>
-		<nav class="flex gap-4">
-			<a href="#dichvu" class="nav-animate font-bold">Dịch vụ</a>
-			<a href="#phanmem" class="nav-animate font-bold">Phần mềm</a>
-			<a href="#khachhang" class="nav-animate font-bold">Khách hàng</a>
-			<a href="#lienhe" class="nav-animate font-bold">Liên hệ</a>
-		</nav>
-	</header>
+		<header class="fixed-navbar">
+			<div class="navbar-content">
+				<span class="navbar-logo">ZinhCloud</span>
+				<nav class="navbar-links">
+					<a href="#dichvu">Dịch vụ</a>
+					<a href="#phanmem">Phần mềm</a>
+					<a href="#lienhe">Liên hệ</a>
+				</nav>
+			</div>
+		</header>
 
 	<!-- Banner -->
 	<section class="gradient-bg py-24 text-center mb-12 rounded-xl shadow-lg">
-<script>
-window.addEventListener('scroll', function() {
-	const navbar = document.getElementById('dynamic-navbar');
-	if (window.scrollY > 60) {
-		navbar.classList.add('shrink');
-	} else {
-		navbar.classList.remove('shrink');
-	}
-});
-</script>
+
 		<h1 class="text-4xl font-extrabold mb-4 tracking-tight">Dịch vụ máy chủ Game Việt Nam</h1>
 		<p class="text-lg mb-8 font-medium max-w-xl mx-auto">Hiệu năng cao, giá tốt, hỗ trợ 24/7. Khởi tạo máy chủ chỉ trong 30 giây!</p>
 		<a href="#dichvu" class="btn-animate px-8 py-3 text-lg font-bold shadow-lg">Xem các gói dịch vụ</a>
