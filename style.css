@@ -1,0 +1,30 @@
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background: #f3f4f6;
+  color: #222;
+}
+.gradient-bg {
+  background: linear-gradient(90deg, #2563eb 0%, #38bdf8 100%);
+}
+.card-animate {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card-animate:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(56,189,248,0.15);
+}
+.btn-animate {
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+.btn-animate:hover {
+  background: linear-gradient(90deg, #38bdf8 0%, #2563eb 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(37,99,235,0.15);
+}
+.nav-animate {
+  transition: color 0.3s, border-bottom 0.3s;
+}
+.nav-animate:hover {
+  color: #38bdf8;
+  border-bottom: 2px solid #38bdf8;
+}

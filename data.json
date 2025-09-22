@@ -1,0 +1,48 @@
+{
+  "services": [
+    {
+      "name": "Basic",
+      "cpu": "Intel® Xeon® E5 2697v3",
+      "ram": "3GB",
+      "storage": "SSD NVMe",
+      "port": "10Gbps",
+      "firewall": "AntiDDoS Pro",
+      "price": "25,000 VND"
+    },
+    {
+      "name": "Balanced",
+      "cpu": "Intel® Xeon® Gold 6150",
+      "ram": "2GB",
+      "storage": "SSD NVMe",
+      "port": "10Gbps",
+      "firewall": "AntiDDoS Pro",
+      "price": "60,000 VND"
+    },
+    {
+      "name": "High Performance",
+      "cpu": "AMD® Ryzen™ 9 9900X/9950X",
+      "ram": "8GB",
+      "storage": "SSD NVMe",
+      "port": "10Gbps",
+      "firewall": "AntiDDoS Pro",
+      "price": "400,000 VND"
+    }
+  ],
+  "feedbacks": [
+    {
+      "user": "@sz***ha",
+      "avatar": "https://img.zyndata.vn/landingpage/feedbacks/avatars/f43e808a758babf00481006fcef67509.webp",
+      "comment": "10/10 mua lại lần 2 và không cảm thấy thất vọng!!! ❤️ yêu lắm nha"
+    },
+    {
+      "user": "@kyno****iz",
+      "avatar": "https://img.zyndata.vn/landingpage/feedbacks/avatars/bb30d1be67bd59b5b1c580666acd19b8.webp",
+      "comment": "Support quá nhiệt tình, host mượt, giá tốt!"
+    },
+    {
+      "user": "@ba**ai",
+      "avatar": "https://img.zyndata.vn/landingpage/feedbacks/avatars/01d2426f86df8b56c3fb05939497d6b0.webp",
+      "comment": "Host mạnh, rất ngon, đặc biệt là koshokatari 🥴"
+    }
+  ]
+}
