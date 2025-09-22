@@ -5,7 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZinhCloud - Dịch vụ cho thuê máy chủ Game Việt Nam</title>
   <meta name="description" content="ZinhCloud - Dịch vụ cho thuê máy chủ Game Việt Nam, hiệu năng cao, giá tốt, hỗ trợ 24/7.">
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+      body { font-family: 'Inter', Arial, sans-serif; }
+      .gradient-bg { background: linear-gradient(90deg, #2563eb 0%, #38bdf8 100%); }
+      .card-animate { transition: transform 0.3s, box-shadow 0.3s; }
+      .card-animate:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 8px 32px rgba(56,189,248,0.15); }
+      .btn-animate { transition: background 0.3s, color 0.3s, box-shadow 0.3s; }
+      .btn-animate:hover { background: linear-gradient(90deg, #38bdf8 0%, #2563eb 100%); color: #fff; box-shadow: 0 4px 16px rgba(37,99,235,0.15); }
+      .nav-animate { transition: color 0.3s, border-bottom 0.3s; font-weight: 600; letter-spacing: 0.5px; }
+      .nav-animate:hover { color: #2563eb; border-bottom: 2px solid #2563eb; }
+      .shadow-lg { box-shadow: 0 8px 32px rgba(56,189,248,0.15); }
+      .rounded-xl { border-radius: 1rem; }
+      .service-icon { width: 48px; height: 48px; margin-bottom: 12px; }
+    </style>
   <style>
     .gradient-bg {
       background: linear-gradient(90deg, #2563eb 0%, #38bdf8 100%);
@@ -38,8 +54,11 @@
   <!-- Header -->
   <header class="bg-white shadow">
     <div class="container mx-auto flex justify-between items-center py-4 px-6">
-      <div class="text-2xl font-bold text-blue-600">ZinhCloud</div>
-      <nav class="space-x-6">
+      <div class="flex items-center gap-2">
+        <img src="https://img.zyndata.vn/asakacloud-text.svg" alt="ZinhCloud Logo" class="w-10 h-10">
+        <span class="text-2xl font-bold text-blue-600 tracking-tight">ZinhCloud</span>
+      </div>
+      <nav class="space-x-6 flex items-center">
         <a href="#dichvu" class="nav-animate">Dịch vụ</a>
         <a href="#phanmem" class="nav-animate">Phần mềm hỗ trợ</a>
         <a href="#khachhang" class="nav-animate">Khách hàng</a>
@@ -54,41 +73,41 @@
   <!-- Banner -->
   <section class="gradient-bg text-white py-16 text-center animate__animated animate__fadeIn">
     <img src="https://img.zyndata.vn/asakacloud-text.svg" alt="ZinhCloud Logo" class="mx-auto mb-6 w-48 h-auto">
-    <h1 class="text-4xl font-extrabold mb-4">Dịch vụ cho thuê máy chủ Game Việt Nam</h1>
-    <p class="text-lg mb-6">Hiệu năng cao, giá tốt, hỗ trợ 24/7. Khởi tạo máy chủ chỉ trong 30 giây!</p>
-    <a href="#dichvu" class="bg-white text-blue-600 px-6 py-2 rounded font-semibold shadow hover:bg-gray-100">Xem các gói dịch vụ</a>
+    <h1 class="text-4xl font-extrabold mb-4 tracking-tight">Dịch vụ cho thuê máy chủ Game Việt Nam</h1>
+    <p class="text-lg mb-6 font-medium">Hiệu năng cao, giá tốt, hỗ trợ 24/7. Khởi tạo máy chủ chỉ trong 30 giây!</p>
+    <a href="#dichvu" class="bg-white text-blue-600 px-6 py-2 rounded-xl font-semibold shadow-lg btn-animate">Xem các gói dịch vụ</a>
   </section>
 
   <!-- Các gói dịch vụ -->
   <section id="dichvu" class="container mx-auto py-16 px-6">
     <h2 class="text-3xl font-bold mb-8 text-center">Chọn gói phù hợp với nhu cầu của bạn</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="bg-white rounded shadow p-6 flex flex-col items-center card-animate">
-        <img src="https://img.zyndata.vn/landingpage/epyccpu-n31.png" alt="Basic Server" class="mb-4 w-24 h-24 object-contain">
-        <div class="text-xl font-bold mb-2">Basic</div>
-        <div class="mb-2">Intel® Xeon® E5 2697v3</div>
-        <div class="mb-2">RAM từ 3GB, SSD NVMe</div>
-        <div class="mb-2">10Gbps port, Firewall AntiDDoS Pro</div>
+      <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center card-animate animate__animated animate__fadeInUp animate__delay-1s">
+        <img src="https://img.zyndata.vn/landingpage/epyccpu-n31.png" alt="Basic Server" class="service-icon object-contain">
+        <div class="text-xl font-bold mb-2 tracking-tight">Basic</div>
+        <div class="mb-2 text-gray-700">Intel® Xeon® E5 2697v3</div>
+        <div class="mb-2 text-gray-700">RAM từ 3GB, SSD NVMe</div>
+        <div class="mb-2 text-gray-700">10Gbps port, Firewall AntiDDoS Pro</div>
         <div class="mb-4 font-semibold text-blue-600">Chỉ từ 25,000 VND</div>
-        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded btn-animate">Xem chi tiết</a>
+        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-xl btn-animate font-semibold shadow-lg">Xem chi tiết</a>
       </div>
-      <div class="bg-white rounded shadow p-6 flex flex-col items-center border-2 border-blue-600 card-animate">
-        <img src="https://img.zyndata.vn/landingpage/datacenter/vnpt-dc-3.png" alt="Balanced Server" class="mb-4 w-24 h-24 object-contain">
-        <div class="text-xl font-bold mb-2">Balanced <span class="text-xs bg-blue-600 text-white px-2 py-1 rounded">Best Seller</span></div>
-        <div class="mb-2">Intel® Xeon® Gold 6150</div>
-        <div class="mb-2">RAM từ 2GB, SSD NVMe</div>
-        <div class="mb-2">10Gbps port, Firewall AntiDDoS Pro</div>
+      <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center border-2 border-blue-600 card-animate animate__animated animate__fadeInUp animate__delay-2s">
+        <img src="https://img.zyndata.vn/landingpage/datacenter/vnpt-dc-3.png" alt="Balanced Server" class="service-icon object-contain">
+        <div class="text-xl font-bold mb-2 tracking-tight">Balanced <span class="text-xs bg-blue-600 text-white px-2 py-1 rounded">Best Seller</span></div>
+        <div class="mb-2 text-gray-700">Intel® Xeon® Gold 6150</div>
+        <div class="mb-2 text-gray-700">RAM từ 2GB, SSD NVMe</div>
+        <div class="mb-2 text-gray-700">10Gbps port, Firewall AntiDDoS Pro</div>
         <div class="mb-4 font-semibold text-blue-600">Chỉ từ 60,000 VND</div>
-        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded btn-animate">Xem chi tiết</a>
+        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-xl btn-animate font-semibold shadow-lg">Xem chi tiết</a>
       </div>
-      <div class="bg-white rounded shadow p-6 flex flex-col items-center card-animate">
-        <img src="https://img.zyndata.vn/landingpage/feedbacks/avatars/f43e808a758babf00481006fcef67509.webp" alt="High Performance Server" class="mb-4 w-24 h-24 object-contain">
-        <div class="text-xl font-bold mb-2">High Performance</div>
-        <div class="mb-2">AMD® Ryzen™ 9 9900X/9950X</div>
-        <div class="mb-2">RAM từ 8GB, SSD NVMe</div>
-        <div class="mb-2">10Gbps port, Firewall AntiDDoS Pro</div>
+      <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center card-animate animate__animated animate__fadeInUp animate__delay-3s">
+        <img src="https://img.zyndata.vn/landingpage/feedbacks/avatars/f43e808a758babf00481006fcef67509.webp" alt="High Performance Server" class="service-icon object-contain">
+        <div class="text-xl font-bold mb-2 tracking-tight">High Performance</div>
+        <div class="mb-2 text-gray-700">AMD® Ryzen™ 9 9900X/9950X</div>
+        <div class="mb-2 text-gray-700">RAM từ 8GB, SSD NVMe</div>
+        <div class="mb-2 text-gray-700">10Gbps port, Firewall AntiDDoS Pro</div>
         <div class="mb-4 font-semibold text-blue-600">Chỉ từ 400,000 VND</div>
-        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded btn-animate">Xem chi tiết</a>
+        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-xl btn-animate font-semibold shadow-lg">Xem chi tiết</a>
       </div>
     </div>
   </section>
@@ -97,35 +116,35 @@
   <section class="bg-white py-16 px-6">
     <h2 class="text-3xl font-bold mb-8 text-center">Ưu điểm nổi bật của ZinhCloud</h2>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-      <div>
+      <div class="p-6 animate__animated animate__fadeInLeft animate__delay-1s">
         <div class="text-blue-600 text-4xl mb-2">⚡</div>
-        <div class="font-bold mb-2">Khởi tạo tức thì</div>
-        <div>Máy chủ sẵn sàng hoạt động chỉ trong 30 giây.</div>
+        <div class="font-bold mb-2 tracking-tight">Khởi tạo tức thì</div>
+        <div class="text-gray-700">Máy chủ sẵn sàng hoạt động chỉ trong 30 giây.</div>
       </div>
-      <div>
+      <div class="p-6 animate__animated animate__fadeInLeft animate__delay-2s">
         <div class="text-blue-600 text-4xl mb-2">🛡️</div>
-        <div class="font-bold mb-2">Bảo vệ AntiDDoS Pro</div>
-        <div>Hệ thống phòng chống tấn công DDoS tiên tiến.</div>
+        <div class="font-bold mb-2 tracking-tight">Bảo vệ AntiDDoS Pro</div>
+        <div class="text-gray-700">Hệ thống phòng chống tấn công DDoS tiên tiến.</div>
       </div>
-      <div>
+      <div class="p-6 animate__animated animate__fadeInLeft animate__delay-3s">
         <div class="text-blue-600 text-4xl mb-2">💾</div>
-        <div class="font-bold mb-2">Sao lưu không giới hạn</div>
-        <div>Khôi phục dễ dàng với 1 click, an tâm về dữ liệu.</div>
+        <div class="font-bold mb-2 tracking-tight">Sao lưu không giới hạn</div>
+        <div class="text-gray-700">Khôi phục dễ dàng với 1 click, an tâm về dữ liệu.</div>
       </div>
-      <div>
+      <div class="p-6 animate__animated animate__fadeInRight animate__delay-1s">
         <div class="text-blue-600 text-4xl mb-2">🔧</div>
-        <div class="font-bold mb-2">Cài đặt mod 1-click</div>
-        <div>Thư viện mod/plugin phong phú, cài đặt dễ dàng.</div>
+        <div class="font-bold mb-2 tracking-tight">Cài đặt mod 1-click</div>
+        <div class="text-gray-700">Thư viện mod/plugin phong phú, cài đặt dễ dàng.</div>
       </div>
-      <div>
+      <div class="p-6 animate__animated animate__fadeInRight animate__delay-2s">
         <div class="text-blue-600 text-4xl mb-2">💸</div>
-        <div class="font-bold mb-2">Giá cả hợp lý</div>
-        <div>Chất lượng cao, chi phí thấp, phù hợp mọi túi tiền.</div>
+        <div class="font-bold mb-2 tracking-tight">Giá cả hợp lý</div>
+        <div class="text-gray-700">Chất lượng cao, chi phí thấp, phù hợp mọi túi tiền.</div>
       </div>
-      <div>
+      <div class="p-6 animate__animated animate__fadeInRight animate__delay-3s">
         <div class="text-blue-600 text-4xl mb-2">🤝</div>
-        <div class="font-bold mb-2">Hỗ trợ 24/7</div>
-        <div>Đội ngũ kỹ thuật luôn sẵn sàng hỗ trợ bạn.</div>
+        <div class="font-bold mb-2 tracking-tight">Hỗ trợ 24/7</div>
+        <div class="text-gray-700">Đội ngũ kỹ thuật luôn sẵn sàng hỗ trợ bạn.</div>
       </div>
     </div>
   </section>
@@ -134,21 +153,21 @@
   <section id="phanmem" class="container mx-auto py-16 px-6">
     <h2 class="text-3xl font-bold mb-8 text-center">Phần mềm được hỗ trợ</h2>
     <div class="flex flex-wrap justify-center gap-4">
-      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded card-animate">Paper</span>
-      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded card-animate">Purpur</span>
-      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded card-animate">Spigot</span>
-      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded card-animate">Forge</span>
-      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded card-animate">Fabric</span>
-      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded card-animate">Sponge</span>
-      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded card-animate">BungeeCord</span>
-      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded card-animate">Velocity</span>
-      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded card-animate">Vanilla</span>
-      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded card-animate">Bedrock</span>
-      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded card-animate">Node.js</span>
-      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded card-animate">Python</span>
-      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded card-animate">ARK</span>
-      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded card-animate">SAMP</span>
-      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded card-animate">OMP</span>
+      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Paper</span>
+      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Purpur</span>
+      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Spigot</span>
+      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Forge</span>
+      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Fabric</span>
+      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Sponge</span>
+      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">BungeeCord</span>
+      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Velocity</span>
+      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Vanilla</span>
+      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Bedrock</span>
+      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Node.js</span>
+      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Python</span>
+      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">ARK</span>
+      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">SAMP</span>
+      <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">OMP</span>
     </div>
   </section>
 
@@ -196,48 +215,48 @@
             <td class="py-2 px-4 border">Có giới hạn</td>
           </tr>
           <tr>
-            <td class="py-2 px-4 border">Giá thành</td>
+            <div class="bg-blue-50 rounded shadow p-6 flex flex-col items-center card-animate animate__animated animate__fadeInUp animate__delay-1s">
             <td class="py-2 px-4 border">Hợp lý</td>
             <td class="py-2 px-4 border">Trung bình/cao</td>
           </tr>
         </tbody>
-      </table>
+            <div class="bg-blue-50 rounded shadow p-6 flex flex-col items-center card-animate animate__animated animate__fadeInUp animate__delay-2s">
     </div>
   </section>
 
   <!-- Đánh giá khách hàng -->
-  <section id="khachhang" class="container mx-auto py-16 px-6">
+            <div class="bg-blue-50 rounded shadow p-6 flex flex-col items-center card-animate animate__animated animate__fadeInUp animate__delay-3s">
     <h2 class="text-3xl font-bold mb-8 text-center">Khách hàng nói gì về chúng tôi</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="bg-blue-50 rounded shadow p-6 flex flex-col items-center card-animate">
+      <div class="bg-blue-50 rounded-xl shadow-lg p-6 flex flex-col items-center card-animate animate__animated animate__fadeInUp animate__delay-1s">
         <img src="https://img.zyndata.vn/landingpage/feedbacks/avatars/f43e808a758babf00481006fcef67509.webp" alt="@sz***ha" class="mb-2 w-16 h-16 rounded-full object-cover">
-        <div class="font-bold mb-2">@sz***ha</div>
-        <div class="italic mb-2">“10/10 mua lại lần 2 và không cảm thấy thất vọng!!! ❤️ yêu lắm nha”</div>
+        <div class="font-bold mb-2 tracking-tight">@sz***ha</div>
+        <div class="italic mb-2 text-gray-700">“10/10 mua lại lần 2 và không cảm thấy thất vọng!!! ❤️ yêu lắm nha”</div>
       </div>
-      <div class="bg-blue-50 rounded shadow p-6 flex flex-col items-center card-animate">
+      <div class="bg-blue-50 rounded-xl shadow-lg p-6 flex flex-col items-center card-animate animate__animated animate__fadeInUp animate__delay-2s">
         <img src="https://img.zyndata.vn/landingpage/feedbacks/avatars/bb30d1be67bd59b5b1c580666acd19b8.webp" alt="@kyno****iz" class="mb-2 w-16 h-16 rounded-full object-cover">
-        <div class="font-bold mb-2">@kyno****iz</div>
-        <div class="italic mb-2">“Support quá nhiệt tình, host mượt, giá tốt!”</div>
+        <div class="font-bold mb-2 tracking-tight">@kyno****iz</div>
+        <div class="italic mb-2 text-gray-700">“Support quá nhiệt tình, host mượt, giá tốt!”</div>
       </div>
-      <div class="bg-blue-50 rounded shadow p-6 flex flex-col items-center card-animate">
+      <div class="bg-blue-50 rounded-xl shadow-lg p-6 flex flex-col items-center card-animate animate__animated animate__fadeInUp animate__delay-3s">
         <img src="https://img.zyndata.vn/landingpage/feedbacks/avatars/01d2426f86df8b56c3fb05939497d6b0.webp" alt="@ba**ai" class="mb-2 w-16 h-16 rounded-full object-cover">
-        <div class="font-bold mb-2">@ba**ai</div>
-        <div class="italic mb-2">“Host mạnh, rất ngon, đặc biệt là koshokatari 🥴”</div>
+        <div class="font-bold mb-2 tracking-tight">@ba**ai</div>
+        <div class="italic mb-2 text-gray-700">“Host mạnh, rất ngon, đặc biệt là koshokatari 🥴”</div>
       </div>
-      <div class="bg-blue-50 rounded shadow p-6 flex flex-col items-center card-animate">
+      <div class="bg-blue-50 rounded-xl shadow-lg p-6 flex flex-col items-center card-animate animate__animated animate__fadeInUp animate__delay-4s">
         <img src="https://img.zyndata.vn/landingpage/feedbacks/avatars/7b437b436de601c7abac9c547ea24758.webp" alt="@yosh*****hime" class="mb-2 w-16 h-16 rounded-full object-cover">
-        <div class="font-bold mb-2">@yosh*****hime</div>
-        <div class="italic mb-2">“10đ k có nhưng, sp nhanh, xịn, giá host ngon bổ rẻ vl, hiệu năng tốt, biết tối ưu thì lúc nào cũng 20 tps thẳng tắp...”</div>
+        <div class="font-bold mb-2 tracking-tight">@yosh*****hime</div>
+        <div class="italic mb-2 text-gray-700">“10đ k có nhưng, sp nhanh, xịn, giá host ngon bổ rẻ vl, hiệu năng tốt, biết tối ưu thì lúc nào cũng 20 tps thẳng tắp...”</div>
       </div>
-      <div class="bg-blue-50 rounded shadow p-6 flex flex-col items-center card-animate">
+      <div class="bg-blue-50 rounded-xl shadow-lg p-6 flex flex-col items-center card-animate animate__animated animate__fadeInUp animate__delay-5s">
         <img src="https://img.zyndata.vn/landingpage/feedbacks/avatars/d11830cad590f8be1770002ff4613056.webp" alt="@demm****xaem" class="mb-2 w-16 h-16 rounded-full object-cover">
-        <div class="font-bold mb-2">@demm****xaem</div>
-        <div class="italic mb-2">“Thật sự quá mượt, ae nên dùng gói gold, bal, per và ryzen nhé + tối ưu của staff nữa nói là múp chấp hết”</div>
+        <div class="font-bold mb-2 tracking-tight">@demm****xaem</div>
+        <div class="italic mb-2 text-gray-700">“Thật sự quá mượt, ae nên dùng gói gold, bal, per và ryzen nhé + tối ưu của staff nữa nói là múp chấp hết”</div>
       </div>
-      <div class="bg-blue-50 rounded shadow p-6 flex flex-col items-center card-animate">
+      <div class="bg-blue-50 rounded-xl shadow-lg p-6 flex flex-col items-center card-animate animate__animated animate__fadeInUp animate__delay-6s">
         <img src="https://img.zyndata.vn/landingpage/feedbacks/avatars/b121bbd5fd6eebbb4c2307b3f75687dd.webp" alt="@sun***ukii" class="mb-2 w-16 h-16 rounded-full object-cover">
-        <div class="font-bold mb-2">@sun***ukii</div>
-        <div class="italic mb-2">“Xịn quá ko bt khen như nào nx:v”</div>
+        <div class="font-bold mb-2 tracking-tight">@sun***ukii</div>
+        <div class="italic mb-2 text-gray-700">“Xịn quá ko bt khen như nào nx:v”</div>
       </div>
     </div>
   </section>
