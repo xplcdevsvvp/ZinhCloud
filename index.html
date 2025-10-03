@@ -1,423 +1,144 @@
 <!doctype html>
 <html lang="vi">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Zing Cloud — Demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Zing Cloud</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #1e1b4b, #312e81, #000);
+      font-family: system-ui, sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+    /* Header co giãn */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+    header.large { padding: 20px 40px; font-size: 20px; }
+    header.small { padding: 8px 20px; font-size: 16px; }
 
-<!-- Tailwind -->
-<script src="https://cdn.tailwindcss.com"></script>
-<!-- QR code lib -->
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
-<!-- html5-qrcode (optional scanner) -->
-<script src="https://unpkg.com/html5-qrcode@2.3.8/minified/html5-qrcode.min.js"></script>
+    /* Button phóng to khi nhấn */
+    .btn {
+      background: linear-gradient(90deg, #4f46e5, #9333ea);
+      padding: 10px 20px;
+      border-radius: 10px;
+      transition: transform 0.2s;
+    }
+    .btn:active { transform: scale(1.1); }
 
-<style>
-  :root{
-    --p1:#6b21a8; /* purple */
-    --p2:#1d4ed8; /* blue */
-    --dark:#000000;
-    --glass: rgba(15, 23, 42, 0.45);
-    --glass-2: rgba(8, 16, 30, 0.55);
-  }
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-    color:#eef2ff;
-    background: linear-gradient(135deg,var(--p1),var(--p2),var(--dark));
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    overflow-x:hidden;
-  }
+    /* Dòng ảnh auto lướt */
+    .image-row {
+      width: 100%; height: 220px;
+      white-space: nowrap;
+      overflow: hidden;
+      margin: 40px 0;
+    }
+    .image-row img {
+      width: 180px; height: 180px;
+      margin: 0 15px;
+      border-radius: 20px;
+      display: inline-block;
+      animation: move 15s linear infinite, rotate 8s linear infinite;
+    }
+    @keyframes move { from { transform: translateX(100%);} to { transform: translateX(-100%);} }
+    @keyframes rotate { to { transform: rotate(360deg);} }
 
-  /* LOADING / SPLASH */
-  #splash {
-    position:fixed; inset:0; z-index:80;
-    display:flex; align-items:center; justify-content:center; flex-direction:column;
-    background: linear-gradient(180deg, rgba(2,6,23,0.98), rgba(6,7,23,0.95));
-    transition: opacity .5s ease, visibility .5s ease;
-  }
-  #splash.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
-
-  /* 3D Square Z Logo */
-  .logo-3d {
-    width:140px; height:140px; border-radius:16px;
-    display:flex; align-items:center; justify-content:center;
-    background: linear-gradient(135deg, rgba(107,33,168,1), rgba(29,78,216,1));
-    box-shadow: 0 16px 40px rgba(2,6,23,0.6), 0 6px 18px rgba(29,78,216,0.12);
-    transform-style:preserve-3d;
-    animation: logo-tilt 3s infinite linear;
-    font-weight:900; font-size:56px; color:white;
-  }
-  @keyframes logo-tilt {
-    0%{transform: perspective(800px) rotateX(8deg) rotateY(-12deg) rotateZ(0deg)}
-    50%{transform: perspective(800px) rotateX(10deg) rotateY(12deg) rotateZ(6deg)}
-    100%{transform: perspective(800px) rotateX(8deg) rotateY(-12deg) rotateZ(0deg)}
-  }
-
-  /* Header */
-  header{ position:fixed; top:0; left:0; right:0; z-index:70; backdrop-filter: blur(8px); transition:all .28s ease; background:linear-gradient(180deg, rgba(2,6,23,0.26), rgba(2,6,23,0.12)); }
-  header.expanded{ padding:20px 12px; }
-  header.shrink{ padding:8px 12px; box-shadow:0 8px 30px rgba(2,6,23,0.6); }
-
-  /* Logo text in header */
-  .brand {
-    display:flex; align-items:center; gap:10px; text-decoration:none;
-    color:transparent; -webkit-background-clip:text; background-clip:text;
-    background: linear-gradient(90deg, #7b56e9, #10b981);
-    font-weight:800;
-  }
-
-  /* Buttons zoom */
-  .btn-zoom { transition: transform .14s cubic-bezier(.2,.9,.2,1), box-shadow .14s; }
-  .btn-zoom:active { transform: scale(1.08); box-shadow: 0 16px 40px rgba(2,6,23,0.45); }
-
-  /* Glass panels (transparent / blur blue) */
-  .glass {
-    background: linear-gradient(180deg, rgba(8,16,30,0.45), rgba(6,8,20,0.25));
-    border:1px solid rgba(255,255,255,0.04);
-    backdrop-filter: blur(10px);
-  }
-
-  /* Brand strip carousel */
-  .brand-strip{ height:260px; overflow:hidden; position:relative; margin:18px 0; display:block; }
-  .brand-track{ display:flex; gap:24px; position:absolute; left:0; top:50%; transform:translateY(-50%); animation: scroll-left 20s linear infinite; }
-  .brand-card{ width:220px; height:180px; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; padding:12px; background: rgba(255,255,255,0.03); transform-origin:center; transition:transform .35s; }
-  .brand-card:hover{ transform: translateY(-10px) rotateY(6deg) scale(1.03); }
-  @keyframes scroll-left { 0%{ left:100% } 100%{ left:-2800px } }
-
-  /* Services grid */
-  .plan { transition:transform .2s, box-shadow .2s; }
-  .plan:hover{ transform: translateY(-8px); box-shadow: 0 14px 40px rgba(2,6,23,0.6); }
-
-  /* Contact floating button & menu */
-  .contact-fab{ position:fixed; right:18px; bottom:18px; z-index:80; width:64px; height:64px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; cursor:pointer; box-shadow:0 12px 36px rgba(13,42,148,0.18); background:linear-gradient(135deg,#2563eb,#7c3aed); }
-  .contact-menu{ position:fixed; right:18px; bottom:92px; display:none; flex-direction:column; gap:10px; z-index:80; }
-  .contact-menu a{ display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px; background: linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.45)); color:white; text-decoration:none; backdrop-filter: blur(8px); }
-
-  /* Modals */
-  .modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:90; background: linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.85)); }
-  .modal.show{ display:flex; }
-  .modal-card { width:100%; max-width:920px; border-radius:14px; padding:18px; background: linear-gradient(180deg, rgba(8,16,30,0.6), rgba(6,8,20,0.35)); border:1px solid rgba(255,255,255,0.04); backdrop-filter: blur(10px); }
-
-  /* Auth popup style: transparent blue */
-  .auth-card { width:100%; max-width:420px; border-radius:12px; padding:18px; background: linear-gradient(180deg, rgba(13,42,148,0.16), rgba(13,42,148,0.06)); border: 1px solid rgba(29,78,216,0.14); backdrop-filter: blur(8px); color:#e6eefc; }
-
-  /* Responsive tweaks */
-  @media (max-width:768px){
-    .brand-track{ animation-duration: 28s; }
-    .brand-card{ width:160px; height:140px; }
-    .brand-strip{ height:200px; }
-    header.expanded{ padding:12px; }
-  }
-
-  /* small accessibility */
-  a:focus,button:focus,input:focus{ outline: 3px solid rgba(99,102,241,0.18); outline-offset:2px; }
-</style>
+    /* Biểu tượng liên hệ */
+    .contact-btn {
+      position: fixed;
+      bottom: 20px; right: 20px;
+      background: #4f46e5;
+      color: white;
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 30px;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 0 15px #4f46e5;
+    }
+    .contact-menu {
+      position: fixed;
+      bottom: 90px; right: 20px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1000;
+    }
+    .contact-menu a {
+      background: rgba(0,0,0,0.7);
+      padding: 8px 14px;
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+      font-size: 14px;
+      color: white;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-
-<!-- SPLASH / LOADING (default 5s) -->
-<div id="splash" role="status" aria-label="Loading splash">
-  <div class="logo-3d" id="splashLogo">Z</div>
-  <div class="mt-4 text-slate-200/60">Zing Cloud — preparing your sky...</div>
-</div>
-
-<!-- HEADER -->
-<header id="mainHeader" class="expanded">
-  <div class="max-w-7xl mx-auto px-4 flex items-center justify-between">
-    <a href="#home" class="flex items-center gap-3 no-underline">
-      <div style="width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--p1),var(--p2));display:flex;align-items:center;justify-content:center;font-weight:900">Z</div>
-      <div class="brand text-xl font-extrabold">Zing Cloud</div>
-    </a>
-
-    <nav class="hidden md:flex items-center gap-4">
-      <a href="#home" class="px-3 py-2 hover:underline">Home</a>
-      <a href="#services" class="px-3 py-2 hover:underline">Dịch vụ</a>
-      <a href="#support" class="px-3 py-2 hover:underline">Hỗ trợ</a>
-      <a href="#contact" class="px-3 py-2 hover:underline">Liên hệ</a>
-      <button id="loginBtn" class="btn-zoom px-4 py-2 rounded-md text-white" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.04)">Đăng nhập</button>
-      <button id="regBtn" class="btn-zoom px-4 py-2 rounded-md text-white" style="background:linear-gradient(90deg,var(--p1),var(--p2))">Đăng ký</button>
+  <!-- Header -->
+  <header class="large flex justify-between items-center">
+    <div class="text-2xl font-bold">Zing Cloud</div>
+    <nav class="space-x-6">
+      <a href="#">Trang chủ</a>
+      <a href="#">Dịch vụ</a>
+      <a href="#">Hỗ trợ</a>
+      <a href="#">Liên hệ</a>
     </nav>
+  </header>
 
-    <!-- mobile -->
-    <div class="md:hidden">
-      <button id="mobileToggle" class="btn-zoom px-3 py-2 rounded-md" style="background:rgba(255,255,255,0.06)">☰</button>
+  <!-- Nội dung -->
+  <main class="pt-32 px-6 text-center">
+    <h1 class="text-4xl font-bold mb-4">Chào mừng đến với Zing Cloud</h1>
+    <p class="mb-6">Dịch vụ VPS, Cloud Game, Hosting Premium với hiệu ứng đẹp mắt.</p>
+    <button class="btn">Bắt đầu ngay</button>
+
+    <!-- Dòng hình ảnh -->
+    <div class="image-row mt-12">
+      <img src="https://via.placeholder.com/200x200?text=Logo" alt="logo">
+      <img src="https://via.placeholder.com/200x200?text=Verify" alt="verify">
+      <img src="https://via.placeholder.com/200x200?text=User" alt="user">
+      <img src="https://via.placeholder.com/200x200?text=Cloud" alt="cloud">
     </div>
+  </main>
+
+  <!-- Nút liên hệ -->
+  <div class="contact-btn" id="contactBtn">✉</div>
+  <div class="contact-menu" id="contactMenu">
+    <a href="https://discord.gg/" target="_blank">Discord</a>
+    <a href="https://facebook.com/" target="_blank">Facebook</a>
+    <a href="https://m.me/" target="_blank">Messenger</a>
+    <a href="mailto:pharmas.asaka@gmail.com">Email</a>
+    <a href="tel:0705983391">Hotline</a>
   </div>
-</header>
 
-<!-- MOBILE NAV -->
-<div id="mobileNav" class="fixed inset-0 z-60 hidden modal" aria-hidden="true">
-  <div class="w-full h-full flex items-start justify-center pt-20">
-    <div class="w-full max-w-sm mx-4 bg-gradient-to-b from-black/60 to-black/40 rounded-xl p-6 glass">
-      <div class="flex justify-between items-center mb-4"><div class="font-bold text-lg">Zing Cloud</div><button id="closeMobile" class="px-3 py-2 rounded bg-white/6">Đóng</button></div>
-      <nav class="flex flex-col gap-3">
-        <a href="#home" class="py-2">Home</a>
-        <a href="#services" class="py-2">Dịch vụ</a>
-        <a href="#support" class="py-2">Hỗ trợ</a>
-        <a href="#contact" class="py-2">Liên hệ</a>
-        <div class="mt-4 flex gap-3">
-          <button id="mLogin" class="flex-1 btn-zoom px-4 py-2 rounded bg-white/6">Đăng nhập</button>
-          <button id="mReg" class="flex-1 btn-zoom px-4 py-2 rounded" style="background:linear-gradient(90deg,var(--p1),var(--p2))">Đăng ký</button>
-        </div>
-      </nav>
-    </div>
-  </div>
-</div>
+  <script>
+    // Header co giãn
+    window.addEventListener("scroll", function() {
+      let header = document.querySelector("header");
+      if (window.scrollY > 50) {
+        header.classList.remove("large");
+        header.classList.add("small");
+      } else {
+        header.classList.remove("small");
+        header.classList.add("large");
+      }
+    });
 
-<!-- MAIN -->
-<main id="main" class="pt-36 max-w-7xl mx-auto px-4">
-  <!-- HERO -->
-  <section id="home" class="grid md:grid-cols-2 gap-8 items-center">
-    <div>
-      <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Zing Cloud — Dịch vụ Cloud & VPS</h1>
-      <p class="mt-4 text-slate-200/80">Gradient tím-xanh-đen, hiệu ứng mượt mà, header co giãn, popup đăng nhập trong suốt, và QR thanh toán demo.</p>
-      <div class="mt-6 flex flex-wrap gap-4">
-        <a href="#services" class="btn-zoom px-5 py-3 rounded-md text-white" style="background:linear-gradient(90deg,var(--p1),var(--p2))">Xem dịch vụ</a>
-        <button id="openSupport" class="btn-zoom px-5 py-3 rounded-md" style="background:rgba(255,255,255,0.06)">Liên hệ</button>
-      </div>
-    </div>
-    <div class="glass p-6 rounded-2xl">
-      <h3 class="font-bold text-lg">Ưu điểm nổi bật</h3>
-      <ul class="mt-3 space-y-2 text-slate-200/80">
-        <li>● Hạ tầng ổn định, backup hàng ngày</li>
-        <li>● Tùy chọn VPS, Cloud Game, Dedicated</li>
-        <li>● Thanh toán QR & hỗ trợ ngân hàng toàn cầu</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- BRAND STRIP (200-300px) -->
-  <section class="brand-strip">
-    <div class="brand-track" id="brandTrack" aria-hidden="true">
-      <!-- sample cards -->
-      <div class="brand-card">
-        <div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(90deg,#60a5fa,#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700;color:#001">A</div>
-        <div class="text-sm mt-2">Verify</div>
-      </div>
-      <div class="brand-card">
-        <div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(90deg,#34d399,#60a5fa);display:flex;align-items:center;justify-content:center;font-weight:700;color:#001">U</div>
-        <div class="text-sm mt-2">User</div>
-      </div>
-      <div class="brand-card">
-        <div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(90deg,#7c3aed,#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:700;color:#001">Z</div>
-        <div class="text-sm mt-2">Logo</div>
-      </div>
-      <div class="brand-card">
-        <div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(90deg,#f97316,#f43f5e);display:flex;align-items:center;justify-content:center;font-weight:700;color:#001">G</div>
-        <div class="text-sm mt-2">Game</div>
-      </div>
-      <!-- repeat to ensure long scroll -->
-      <div class="brand-card"><div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(90deg,#60a5fa,#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700;color:#001">C</div><div class="text-sm mt-2">Cloud</div></div>
-      <div class="brand-card"><div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(90deg,#34d399,#60a5fa);display:flex;align-items:center;justify-content:center;font-weight:700;color:#001">S</div><div class="text-sm mt-2">Secure</div></div>
-      <div class="brand-card"><div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(90deg,#7c3aed,#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:700;color:#001">N</div><div class="text-sm mt-2">Partner</div></div>
-    </div>
-  </section>
-
-  <!-- SERVICES (buttons open modal with full plans) -->
-  <section id="services" class="mt-12 mb-12">
-    <div class="flex items-center justify-between mb-6">
-      <h2 class="text-2xl font-bold">Dịch vụ</h2>
-      <div class="flex gap-3">
-        <button class="btn-zoom px-3 py-2 glass rounded-md" onclick="openService('vps')">VPS</button>
-        <button class="btn-zoom px-3 py-2 glass rounded-md" onclick="openService('cloudgame')">Cloud Game</button>
-        <button class="btn-zoom px-3 py-2 glass rounded-md" onclick="openService('dedicated')">Dedicated</button>
-      </div>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-6">
-      <!-- teaser cards -->
-      <div class="plan glass p-6 rounded-2xl">
-        <h3 class="font-semibold text-lg">VPS Starter</h3>
-        <p class="mt-2 text-slate-200/80">Lựa chọn cho project nhỏ và dev.</p>
-        <div class="mt-4 flex gap-3">
-          <button class="btn-zoom px-4 py-2 rounded-md" onclick="openService('vps')">Xem</button>
-          <button class="btn-zoom px-4 py-2 rounded-md" onclick="addToCart('VPS Starter','Performance','2 vCPU / 4GB','9.99')">Mua</button>
-        </div>
-      </div>
-
-      <div class="plan glass p-6 rounded-2xl">
-        <h3 class="font-semibold text-lg">Cloud Game Mini</h3>
-        <p class="mt-2 text-slate-200/80">Chạy game nhẹ, low latency.</p>
-        <div class="mt-4 flex gap-3">
-          <button class="btn-zoom px-4 py-2 rounded-md" onclick="openService('cloudgame')">Xem</button>
-          <button class="btn-zoom px-4 py-2 rounded-md" onclick="addToCart('Cloud Game Mini','Plastic','4 vCPU / 8GB','14.99')">Mua</button>
-        </div>
-      </div>
-
-      <div class="plan glass p-6 rounded-2xl">
-        <h3 class="font-semibold text-lg">Dedicated Pro</h3>
-        <p class="mt-2 text-slate-200/80">Máy chủ vật lý cho doanh nghiệp.</p>
-        <div class="mt-4 flex gap-3">
-          <button class="btn-zoom px-4 py-2 rounded-md" onclick="openService('dedicated')">Xem</button>
-          <button class="btn-zoom px-4 py-2 rounded-md" onclick="addToCart('Dedicated Pro','Premium','8 vCPU / 32GB','79.99')">Mua</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SUPPORT & CONTACT -->
-  <section id="support" class="mb-20">
-    <h2 class="text-2xl font-bold mb-4">Hỗ trợ & Liên hệ</h2>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="glass p-6 rounded-2xl">
-        <h4 class="font-semibold">Kênh liên hệ</h4>
-        <ul class="mt-3 space-y-2 text-slate-200/80">
-          <li>Discord: <a href="#" class="underline">Join our Discord</a></li>
-          <li>Facebook: <a href="#" class="underline">Zing Cloud FB</a></li>
-          <li>Messenger: <a href="#" class="underline">Messenger</a></li>
-          <li>Email: <a href="mailto:pharmas.asaka@gmail.com" class="underline">pharmas.asaka@gmail.com</a></li>
-          <li>Hotline: <a href="tel:+84705983391" class="underline">0705 983 391</a></li>
-        </ul>
-      </div>
-
-      <div class="glass p-6 rounded-2xl">
-        <h4 class="font-semibold">Thanh toán QR (demo)</h4>
-        <p class="mt-2 text-slate-200/80">Nhập chuỗi đơn hàng → tạo QR, quét để thử.</p>
-        <input id="qrText" class="w-full mt-3 p-2 rounded bg-black/30 text-white" placeholder="ZingCloud|VPS|Performance|29.99" />
-        <div class="mt-3 flex gap-3">
-          <button class="btn-zoom px-3 py-2 rounded-md" onclick="generateQR()">Tạo QR</button>
-          <button class="btn-zoom px-3 py-2 rounded-md" onclick="openScanner()">Quét QR</button>
-        </div>
-        <div id="qrcode" class="mt-4"></div>
-        <div id="qrScanner" class="mt-4"></div>
-      </div>
-
-      <div class="glass p-6 rounded-2xl">
-        <h4 class="font-semibold">Đăng nhập / Đăng ký</h4>
-        <p class="mt-2 text-slate-200/80">Form mở dưới dạng popup trong suốt, mờ xanh.</p>
-        <div class="mt-4 flex gap-3">
-          <button id="openLogin" class="btn-zoom px-4 py-2 rounded-md" style="background:rgba(255,255,255,0.06)">Mở Login</button>
-          <button id="openRegister" class="btn-zoom px-4 py-2 rounded-md" style="background:linear-gradient(90deg,var(--p1),var(--p2))">Mở Register</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="py-8 text-sm text-slate-200/80">© <span id="year"></span> Zing Cloud — Demo</footer>
-</main>
-
-<!-- SERVICE MODAL -->
-<div id="serviceModal" class="modal" aria-hidden="true">
-  <div class="modal-card">
-    <button class="float-right px-3 py-1 rounded bg-white/6" onclick="closeService()">Đóng</button>
-    <div id="serviceContent"></div>
-  </div>
-</div>
-
-<!-- CHECKOUT MODAL -->
-<div id="checkoutModal" class="modal" aria-hidden="true">
-  <div class="auth-card">
-    <button class="float-right px-3 py-1 rounded bg-white/6" onclick="closeCheckout()">Đóng</button>
-    <h3 class="text-xl font-bold">Thanh toán</h3>
-    <div id="checkoutInfo" class="mt-4 text-slate-200/80"></div>
-    <div id="checkoutQR" class="mt-4 flex justify-center"></div>
-    <div class="mt-4 text-slate-300 text-sm">Demo QR — liên hệ hotline để xác nhận.</div>
-  </div>
-</div>
-
-<!-- AUTH MODAL (transparent blue) -->
-<div id="authModal" class="modal" aria-hidden="true">
-  <div class="auth-card">
-    <button class="float-right px-3 py-1 rounded bg-white/6" onclick="closeAuth()">Đóng</button>
-    <h3 id="authTitle" class="text-xl font-bold">Đăng nhập</h3>
-    <form id="authForm" class="mt-4 space-y-3">
-      <input id="authEmail" type="email" placeholder="Email" class="w-full p-2 rounded bg-black/30 text-white" required />
-      <input id="authPass" type="password" placeholder="Mật khẩu" class="w-full p-2 rounded bg-black/30 text-white" required />
-      <button type="submit" class="w-full btn-zoom py-2 rounded-md" style="background:linear-gradient(90deg,var(--p1),var(--p2))">Gửi</button>
-    </form>
-  </div>
-</div>
-
-<!-- MOBILE NAV handled above -->
-<!-- CONTACT FLOAT -->
-<div class="contact-fab" id="fab" aria-label="Contact">
-  💬
-</div>
-<div class="contact-menu" id="fabMenu" aria-hidden="true">
-  <a href="https://discord.gg/" target="_blank">Discord</a>
-  <a href="https://facebook.com/" target="_blank">Facebook</a>
-  <a href="https://m.me/" target="_blank">Messenger</a>
-  <a href="mailto:pharmas.asaka@gmail.com">Email</a>
-  <a href="tel:+84705983391">Hotline: 0705 983 391</a>
-</div>
-
-<script>
-  // SET YEAR
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // SPLASH: hide after X ms (5s default). Edit SPLASH_MS to 30000 for 30s.
-  const SPLASH_MS = 5000;
-  window.addEventListener('load', ()=> {
-    setTimeout(()=> {
-      const s = document.getElementById('splash');
-      if(s) s.classList.add('hidden');
-    }, SPLASH_MS);
-  });
-
-  // HEADER shrink/expand
-  const header = document.getElementById('mainHeader');
-  function onScrollHeader(){
-    const y = window.scrollY || window.pageYOffset;
-    if(y < 40){ header.classList.remove('shrink'); header.classList.add('expanded'); }
-    else { header.classList.remove('expanded'); header.classList.add('shrink'); }
-  }
-  window.addEventListener('scroll', onScrollHeader);
-  onScrollHeader();
-
-  // MOBILE NAV toggle
-  document.getElementById('mobileToggle').addEventListener('click', ()=> {
-    document.getElementById('mobileNav').classList.add('show');
-    document.getElementById('mobileNav').style.display = 'flex';
-    document.getElementById('mobileNav').setAttribute('aria-hidden','false');
-  });
-  document.getElementById('closeMobile').addEventListener('click', ()=> {
-    document.getElementById('mobileNav').classList.remove('show');
-    document.getElementById('mobileNav').style.display = 'none';
-    document.getElementById('mobileNav').setAttribute('aria-hidden','true');
-  });
-  // Mobile login/reg
-  document.getElementById('mLogin').addEventListener('click', ()=> { document.getElementById('mobileNav').classList.remove('show'); openAuth('login'); });
-  document.getElementById('mReg').addEventListener('click', ()=> { document.getElementById('mobileNav').classList.remove('show'); openAuth('register'); });
-
-  // SERVICE DATA
-  const SERVICES = {
-    vps: {
-      title:'VPS — Zing Cloud',
-      desc:'Gói VPS cho mọi nhu cầu: từ dev tới production.',
-      plans:[
-        {name:'Performance', cpu:'4 vCPU', ram:'8 GB', disk:'120 GB NVMe', price:'$29.9		<div class="flex flex-wrap justify-center gap-4">
-			<span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Paper</span>
-			<span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Purpur</span>
-			<span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Spigot</span>
-			<span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Forge</span>
-			<span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Fabric</span>
-			<span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Sponge</span>
-			<span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">BungeeCord</span>
-			<span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Velocity</span>
-			<span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Vanilla</span>
-			<span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Bedrock</span>
-			<span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Node.js</span>
-			<span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">Python</span>
-			<span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">ARK</span>
-			<span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">SAMP</span>
-			<span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-xl card-animate font-semibold shadow">OMP</span>
-		</div>
-	</section>
-
-
-
-
-
-
-		<!-- Liên hệ & Footer -->
-		<footer id="lienhe" class="container py-8 mt-16 mb-8 rounded-xl shadow-lg">
-			<div class="flex gap-4 justify-center">
-				<a href="https://fb.com/asakacloudvn" target="_blank" class="btn-animate px-4 py-2 font-semibold">Facebook</a>
-				<a href="https://discord.gg/asakacloud" target="_blank" class="btn-animate px-4 py-2 font-semibold">Discord</a>
-			</div>
-		</footer>
+    // Toggle liên hệ
+    const btn = document.getElementById("contactBtn");
+    const menu = document.getElementById("contactMenu");
+    btn.addEventListener("click", () => {
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    });
+  </script>
 </body>
 </html>
